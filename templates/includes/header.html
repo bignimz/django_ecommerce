@@ -1,6 +1,6 @@
 {% load static %}
 <header class="section-header">
-  <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
+  <nav class="navbar p-md-0 navbar-expand-sm navbar-dark border-bottom">
     <div class="container">
       <button
         class="navbar-toggler"
@@ -19,18 +19,18 @@
             <a href="#" class="nav-link"> English </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link"> USD </a>
+            <a href="#" class="nav-link">Currency: KES (Kenya Shilling) </a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li>
-            <a href="#" class="nav-link">
-              <i class="fa fa-envelope"></i> Email
+            <a href="emailto:info@easyshop.io" class="nav-link">
+              <i class="fa fa-envelope"></i> Email: info@easyshop.io
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link">
-              <i class="fa fa-phone"></i> Call us
+            <a href="tel:+2540123456" class="nav-link">
+              <i class="fa fa-phone"></i> Call us: +254-0123456
             </a>
           </li>
         </ul>
@@ -46,7 +46,7 @@
       <div class="row align-items-center">
         <div class="col-lg-2 col-md-3 col-6">
           <a href="{% url 'home' %}" class="brand-wrap">
-            <img class="logo" src="{% static './images/logo.png' %}" />
+            <img class="logo" src="{% static './images/easy-logo.png' %}" />
           </a>
           <!-- brand-wrap.// -->
         </div>
@@ -54,7 +54,7 @@
           <div class="category-wrap dropdown d-inline-block float-right">
             <button
               type="button"
-              class="btn btn-primary dropdown-toggle"
+              class="btn easy-btn dropdown-toggle"
               data-toggle="dropdown"
             >
               <i class="fa fa-bars"></i> All category
@@ -70,7 +70,7 @@
           <!-- category-wrap.// -->
         </div>
         <!-- col.// -->
-        <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+        <a href="{% url 'store' %}" class="btn btn-outline-easy">Store</a>
         <div class="col-lg col-md-6 col-sm-12 col">
           <form action="#" class="search">
             <div class="input-group w-100">
@@ -82,7 +82,7 @@
               />
 
               <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
+                <button class="btn easy-btn" type="submit">
                   <i class="fa fa-search"></i>
                 </button>
               </div>
@@ -101,7 +101,7 @@
                 <a href="./register.html"> Register</a>
               </div>
             </div>
-            <a href="./cart.html" class="widget-header pl-3 ml-3">
+            <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
               <div class="icon icon-sm rounded-circle border">
                 <i class="fa fa-shopping-cart"></i>
               </div>

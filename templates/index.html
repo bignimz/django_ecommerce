@@ -6,7 +6,10 @@
 <section class="section-intro padding-y-sm">
   <div class="container-fluid">
     <div class="intro-banner-wrap">
-      <img src="{% static 'images/banners/cover.jpg' %}" class="img-fluid" />
+      <img
+        src="{% static 'images/banners/main-banner.jpg' %}"
+        class="img-fluid"
+      />
     </div>
   </div>
 
@@ -36,7 +39,7 @@
             <a href="{{product.get_url}}" class="title"
               >{{ product.product_name }}</a
             >
-            <div class="price mt-1">Ksh{{product.price}}.00</div>
+            <div class="price mt-1">KES{{product.price}}.00</div>
             <!-- price-wrap.// -->
           </figcaption>
         </div>
