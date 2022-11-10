@@ -1521,6 +1521,17 @@ a[class*="card"]:hover .title {
   color: #fff;
 }
 
+/* Search */
+/* .search-error i {
+  font-size: 30px;
+  color: #ff7f00;
+} */
+
+.fa-frown-o {
+  font-size: 90px;
+  color: #333;
+}
+
 /* Footer */
 .section-footer {
   background-color: #111;
