@@ -1532,6 +1532,16 @@ a[class*="card"]:hover .title {
   color: #333;
 }
 
+.easy-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  margin-right: 20px;
+}
+
 /* Footer */
 .section-footer {
   background-color: #111;
