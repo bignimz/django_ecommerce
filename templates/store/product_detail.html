@@ -10,112 +10,93 @@
         <aside class="col-md-6">
           <article class="gallery-wrap">
             <div class="img-big-wrap">
-              <a href="#"><img src="{{single_product.images.url}}" /></a>
+              <a><img src="{{single_product.images.url}}" /></a>
             </div>
             <!-- img-big-wrap.// -->
           </article>
           <!-- gallery-wrap .end// -->
         </aside>
         <main class="col-md-6 border-left">
-          <article class="content-body">
-            <h2 class="title">{{single_product.product_name}}</h2>
+          <form action="{% url 'add_cart' single_product.id %}" method="POST">
+            {% csrf_token %}
+            <article class="content-body">
+              <h2 class="title">{{single_product.product_name}}</h2>
 
-            <div class="mb-3">
-              <var class="price h4">KES{{single_product.price}}.00</var>
-            </div>
+              <div class="mb-3">
+                <var class="price h4">KES{{single_product.price}}.00</var>
+              </div>
 
-            <p>{{single_product.description}}</p>
+              <p>{{single_product.description}}</p>
 
-            <hr />
-            <div class="row">
-              <div class="item-option-select">
-                <h6>Choose Color</h6>
-                <div
-                  class="btn-group btn-group-sm btn-group-toggle"
-                  data-toggle="buttons"
-                >
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" /> Silver
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" /> Gray
-                  </label>
-                  <label class="btn btn-light active">
-                    <input type="radio" name="radio_color checked" /> Gold
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" /> Black
-                  </label>
+              <hr />
+              <div class="row">
+                <div class="item-option-select">
+                  <h6>Choose Color</h6>
+                  <div
+                    class="d-flex flex-wrap btn-group btn-group-sm btn-group-toggle"
+                    data-toggle="buttons"
+                  >
+                    {% for i in single_product.variation_set.colors %}
+                    <label class="btn btn-light">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="{{ i.variation_value | lower }}"
+                        required
+                      />
+                      {{ i.variation_value | capfirst}}
+                    </label>
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- row.// -->
-            <div class="row">
-              <div class="item-option-select">
-                <h6>Select Size</h6>
-                <div
-                  class="btn-group btn-group-sm btn-group-toggle"
-                  data-toggle="buttons"
-                >
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" /> S
-                  </label>
-                  <label class="btn btn-light active">
-                    <input type="radio" name="radio_color" checked /> M
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" /> L
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" /> XL
-                  </label>
+              <!-- row.// -->
+              <div class="row">
+                <div class="item-option-select">
+                  <h6>Select Size</h6>
+                  <div
+                    class="btn-group btn-group-sm btn-group-toggle"
+                    data-toggle="buttons"
+                  >
+                    {% for i in single_product.variation_set.sizes %}
+                    <label class="btn btn-light">
+                      <input
+                        type="radio"
+                        name="size"
+                        value="{{ i.variation_value | lower }}"
+                        required
+                      />
+                      {{ i.variation_value | capfirst }}
+                    </label>
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- row.// -->
-            <hr />
-            {% if single_product.stock <= 0 %}
-            <h5 style="color: red">Out of stock!</h5>
-            <a
-              href="{% url 'add_cart' single_product.id %}"
-              class="btn btn-success disabled"
-            >
-              <span class="text" id="add-text">Add to cart</span>
-              <i class="fas fa-shopping-cart"></i>
-            </a>
-            {% else %} <br />
-            {% if in_cart %}
-            <!-- Added to cart -->
-            <a href="#" class="btn btn-success disabled" id="add_cart">
-              <span class="text" id="add-text" style="color: white"
-                >Added to Cart</span
+              <!-- row.// -->
+              <hr />
+              {% if single_product.stock <= 0 %}
+              <h5 style="color: red">Out of stock!</h5>
+              <a
+                href="{% url 'add_cart' single_product.id %}"
+                class="btn btn-success disabled"
               >
-              <i class="fas fa-check"></i>
-            </a>
-            <a
-              href="{% url 'cart' %}"
-              class="btn easy-outline-btn"
-              id="add_cart"
-            >
-              <span class="text" id="add-text">View Cart</span>
-              <i class="fas fa-eye"></i>
-            </a>
-            {% else %}
-            <h6 class="mb-4 easy">
-              {{single_product.stock}} {{single_product.product_name}}(s) in
-              stock
-            </h6>
-            <a
-              href="{% url 'add_cart' single_product.id %}"
-              class="btn easy-btn"
-              id="add_cart"
-            >
-              <span class="text" id="add-text">Add to cart</span>
-              <i class="fas fa-shopping-cart"></i>
-            </a>
-            {% endif %} <br />
-            {% endif %}
-          </article>
+                <span class="text" id="add-text">Add to cart</span>
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+              {% else %} <br />
+
+              <h6 class="mb-4 easy">
+                {{single_product.stock}} {{single_product.product_name}}(s) in
+                stock
+              </h6>
+              <button type="submit" class="btn easy-btn" id="add_cart">
+                <span class="text" id="add-text">Add to cart</span>
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+
+              {% endif %}
+            </article>
+          </form>
           <!-- product-info-aside .// -->
         </main>
         <!-- col.// -->
